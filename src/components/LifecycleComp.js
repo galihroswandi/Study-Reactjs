@@ -19,21 +19,28 @@ export class LifecycleComp extends Component {
   componentDidMount() {
     console.log('ComponentDidmount')
 
-    setTimeout(() => {
-      this.setState({
-        count: 5,
-      })
-    }, 5000)
+    // setTimeout(() => {
+    //   this.setState({
+    //     count: 5,
+    //   })
+    // }, 1000)
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    console.group('ShouldComponentUpdate')
+    console.log('nextProps : ', nextProps)
+    console.log('nextState : ', nextState)
+    console.groupEnd()
+
+    if (this.state.count > 4) {
+      return false
+    }
     return true
-    console.log('shouldComponentUpdate')
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log('getSnapshotBeforeUpdate')
-    return null;
+    return null
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -44,7 +51,14 @@ export class LifecycleComp extends Component {
     console.log('Component Willunmount')
   }
 
+  changeCount = () => {
+    this.setState({
+      count: this.state.count + 1,
+    })
+  }
+
   render() {
+    console.log('render')
     return (
       <div>
         <button
@@ -60,6 +74,7 @@ export class LifecycleComp extends Component {
             margin: '5rem',
             cursor: 'pointer',
           }}
+          onClick={() => this.changeCount()}
         >
           Component Button {this.state.count}
         </button>
