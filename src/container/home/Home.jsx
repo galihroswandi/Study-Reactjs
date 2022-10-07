@@ -1,6 +1,7 @@
 import React, { useState, Component } from 'react'
 import Product from '../product/Product'
 import LifecycleComp from '../../components/LifecycleComp'
+import BlogPost from '../blogPost/BlogPost'
 
 class Home extends Component {
   state = {
@@ -16,7 +17,12 @@ class Home extends Component {
   // }
 
   render() {
-    return <div>{this.state.showComponent ? <LifecycleComp /> : null}</div>
+    return <div>
+      {/* {this.state.showComponent ? <LifecycleComp /> : null} */}
+      <p>Blog Post</p>
+      <hr/>
+      <BlogPost />
+      </div>
   }
 }
 

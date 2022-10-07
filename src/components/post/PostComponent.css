@@ -1,0 +1,19 @@
+.post{
+    display: flex;
+    flex-direction: row;
+    margin-left: 5rem;
+    box-shadow: 0 0 .2rem #000;
+    padding: .5rem;
+    max-width: 25rem;
+    font-weight: 500;
+    border-radius: .5rem;
+}
+
+.img-thumb > img{
+    border-radius: 1rem;
+    box-shadow: 0 0 .3rem rgb(133, 133, 133);
+}
+
+.content{
+    margin-left: 2rem;
+}
