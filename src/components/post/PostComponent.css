@@ -18,3 +18,16 @@
 .content{
     margin-left: 2rem;
 }
+
+.remove{
+    padding: .6rem;
+    border: none;
+    background-color: #ff006e;
+    border-radius: .2rem;
+    color: #fff;
+}
+
+.remove:hover{
+    cursor: pointer;
+    background-color: #3a86ff;
+}
