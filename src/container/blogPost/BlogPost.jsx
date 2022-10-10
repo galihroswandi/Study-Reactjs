@@ -141,6 +141,7 @@ class BlogPost extends Component {
               id="title"
               onChange={this.handleChangeForm}
               value={this.state.formBlogPost.title}
+              placeholder="add title"
             />
             <label htmlFor="body">Deskripsi</label>
             <textarea
@@ -150,6 +151,7 @@ class BlogPost extends Component {
               rows="10"
               onChange={this.handleChangeForm}
               value={this.state.formBlogPost.body}
+              placeholder="add blog content"
             ></textarea>
             <button onClick={this.handleSubmit}>Tambah Data</button>
           </div>
