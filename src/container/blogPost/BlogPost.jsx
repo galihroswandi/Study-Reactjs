@@ -12,25 +12,64 @@ class BlogPost extends Component {
       title: '',
       body: '',
     },
+    isUpdate: false,
   }
-
   getDataAPI = () => {
-    axios.get('http://localhost:3004/posts?_sort=id&_order=desc').then((response) => {
-      this.setState({
-        post: response.data,
+    axios
+      .get('http://localhost:3004/posts?_sort=id&_order=desc')
+      .then((response) => {
+        this.setState({
+          post: response.data,
+        })
       })
-    })
   }
 
   postDataAPI = () => {
     axios.post('http://localhost:3004/posts', this.state.formBlogPost).then(
       (respose) => {
         this.getDataAPI()
+
+        this.setState({
+          formBlogPost: {
+            userId: 1,
+            id: 1,
+            title: '',
+            body: '',
+          },
+        })
       },
       (err) => {
         alert(err)
       },
     )
+  }
+
+  putDataToAPI = () => {
+    axios
+      .put(
+        `http://localhost:3004/posts/${this.state.formBlogPost.id}`,
+        this.state.formBlogPost,
+      )
+      .then((response) => {
+        this.getDataAPI()
+
+        this.setState({
+          formBlogPost: {
+            userId: 1,
+            id: 1,
+            title: '',
+            body: '',
+          },
+          isUpdate: false,
+        })
+      })
+  }
+
+  handleUpdate = (data) => {
+    this.setState({
+      formBlogPost: data,
+      isUpdate: true,
+    })
   }
 
   handleRemove = (id) => {
@@ -41,6 +80,11 @@ class BlogPost extends Component {
 
   handleChangeForm = (e) => {
     let formBlogPostNew = { ...this.state.formBlogPost }
+    let timestamp = new Date().getTime()
+
+    if (!this.state.isUpdate) {
+      formBlogPostNew['id'] = timestamp
+    }
     formBlogPostNew[e.target.name] = e.target.value
 
     this.setState({
@@ -49,13 +93,24 @@ class BlogPost extends Component {
   }
 
   handleSubmit = () => {
-    if (
-      this.state.formBlogPost.title == '' ||
-      this.state.formBlogPost.body == ''
-    ) {
-      alert('title / deskripsi tidak boleh kosong !')
+    if (this.state.isUpdate) {
+      if (
+        this.state.formBlogPost.title == '' ||
+        this.state.formBlogPost.body == ''
+      ) {
+        alert('title / deskripsi tidak boleh kosong !')
+      } else {
+        this.putDataToAPI()
+      }
     } else {
-      this.postDataAPI()
+      if (
+        this.state.formBlogPost.title == '' ||
+        this.state.formBlogPost.body == ''
+      ) {
+        alert('title / deskripsi tidak boleh kosong !')
+      } else {
+        this.postDataAPI()
+      }
     }
   }
 
@@ -78,9 +133,6 @@ class BlogPost extends Component {
           Blog Post
         </p>
         <div className="form">
-          <div className="title">
-            <h1>Tambah Data</h1>
-          </div>
           <div className="content-form">
             <label htmlFor="title">Judul</label>
             <input
@@ -88,6 +140,7 @@ class BlogPost extends Component {
               name="title"
               id="title"
               onChange={this.handleChangeForm}
+              value={this.state.formBlogPost.title}
             />
             <label htmlFor="body">Deskripsi</label>
             <textarea
@@ -96,6 +149,7 @@ class BlogPost extends Component {
               cols="30"
               rows="10"
               onChange={this.handleChangeForm}
+              value={this.state.formBlogPost.body}
             ></textarea>
             <button onClick={this.handleSubmit}>Tambah Data</button>
           </div>
@@ -115,6 +169,7 @@ class BlogPost extends Component {
                 key={post.id}
                 data={post}
                 remove={this.handleRemove}
+                update={this.handleUpdate}
               />
             )
           })}
