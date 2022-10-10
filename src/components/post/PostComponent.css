@@ -18,3 +18,21 @@
 .content{
     margin-left: 2rem;
 }
+
+.remove, .update{
+    padding: .6rem;
+    border: none;
+    background-color: #ff006e;
+    border-radius: .2rem;
+    color: #fff;
+}
+
+.content > .update{
+    background-color: #22577a;
+    margin-right: .3rem;
+}
+
+.remove:hover, .update:hover{
+    cursor: pointer;
+    background-color: #3a86ff;
+}
