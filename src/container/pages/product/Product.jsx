@@ -1,14 +1,21 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
+import CardProduct from './cardProduct/CardProduct';
 
 class Product extends Component {
   state = {
     order: 1,
   }
 
+  handleCounterChange = (newValue) => {
+    this.setState({
+      order: newValue
+    })
+  }
+
   render() {
     return (
       <Fragment>
-        <div className="header">
+        <div className="header" style={{marginLeft : "5rem"}}>
           <div className="logo">
             <img src="" alt="" />
           </div>
@@ -17,18 +24,7 @@ class Product extends Component {
             <div className="count">{this.state.order}</div>
           </div>
         </div>
-        <div className="card">
-          <div className="img-thumb-product">
-            <img src="" alt="" />
-          </div>
-          <p className="product-title">Daging Ayam Lezatos</p>
-          <p className="product-price">Rp. 35.000</p>
-          <div className="counter">
-            <button className="minus">-</button>
-            <input type="text" name="" id="" value={3} />
-            <button className="plus">+</button>
-          </div>
-        </div>
+        <CardProduct onCounterChange={(value) => this.handleCounterChange(value)} />
       </Fragment>
     )
   }
