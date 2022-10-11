@@ -1,3 +1,13 @@
+:root{
+    --mainColor : #8ecae6;
+    --acsentColor : #fb8500;
+    --textColor : #1d3557;
+}
+
+.text-color{
+    color: var(--textColor);
+}
+
 .post{
     display: flex;
     flex-direction: row;

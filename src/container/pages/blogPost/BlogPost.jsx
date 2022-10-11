@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
-import PostComponent from '../../components/post/PostComponent'
+import PostComponent from '../../../components/post/PostComponent'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './BlogPost.css'
 
@@ -114,6 +115,10 @@ class BlogPost extends Component {
     }
   }
 
+  handleDetail = (id) => {
+    console.log(id)
+  }
+
   componentDidMount() {
     this.getDataAPI()
   }
@@ -141,6 +146,7 @@ class BlogPost extends Component {
               id="title"
               onChange={this.handleChangeForm}
               value={this.state.formBlogPost.title}
+              placeholder="add title"
             />
             <label htmlFor="body">Deskripsi</label>
             <textarea
@@ -150,6 +156,7 @@ class BlogPost extends Component {
               rows="10"
               onChange={this.handleChangeForm}
               value={this.state.formBlogPost.body}
+              placeholder="add blog content"
             ></textarea>
             <button onClick={this.handleSubmit}>Tambah Data</button>
           </div>
@@ -170,6 +177,7 @@ class BlogPost extends Component {
                 data={post}
                 remove={this.handleRemove}
                 update={this.handleUpdate}
+                goDetailPost={this.handleDetail}
               />
             )
           })}
