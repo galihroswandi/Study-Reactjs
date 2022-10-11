@@ -1,8 +1,14 @@
+// libraries
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom'
+
+// pages
 import Product from '../pages/product/Product'
 import LifecycleComp from '../pages/lifecycleComponent/LifecycleComp'
 import BlogPost from "../pages/blogPost/BlogPost";
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom'
+import DetailPost from '../pages/blogPost/detailPost/DetailPost';
+
+// styling
 import './Home.css'
 
 class Home extends Component {
@@ -29,6 +35,7 @@ class Home extends Component {
           </div>
           <Routes>
             <Route path="/" element={<BlogPost />} />
+            <Route path="/detail-post/:id" element={<DetailPost />} />
             <Route path="/product" element={<Product />} />
             <Route path="/lifecycle" element={<LifecycleComp />} />
           </Routes>

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PostComponent from '../../../components/post/PostComponent'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './BlogPost.css'
 
@@ -114,6 +115,10 @@ class BlogPost extends Component {
     }
   }
 
+  handleDetail = (id) => {
+    console.log(id)
+  }
+
   componentDidMount() {
     this.getDataAPI()
   }
@@ -172,6 +177,7 @@ class BlogPost extends Component {
                 data={post}
                 remove={this.handleRemove}
                 update={this.handleUpdate}
+                goDetailPost={this.handleDetail}
               />
             )
           })}

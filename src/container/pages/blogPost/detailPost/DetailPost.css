@@ -1,0 +1,17 @@
+:root{
+    --mainColor : #8ecae6;
+    --acsentColor : #fb8500;
+    --textColor : #1d3557;
+}
+
+.containerfluid{
+    text-transform: capitalize;
+    color: var(--textColor);
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column !important;
+}
+
+.containerfluid > h1{
+    margin-bottom: 1rem;
+}
