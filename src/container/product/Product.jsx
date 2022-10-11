@@ -1,22 +1,21 @@
 import React, { Component, Fragment } from 'react'
 
 class Product extends Component {
-
-    state = {
-        order : 1,
-    }
+  state = {
+    order: 1,
+  }
 
   render() {
     return (
       <Fragment>
         <div className="header">
-            <div className="logo">
-                <img src="" alt="" />
-            </div>
-            <div className="troley">
-                <img src="" alt="" />
-                <div className="count">{this.state.order}</div>
-            </div>
+          <div className="logo">
+            <img src="" alt="" />
+          </div>
+          <div className="troley">
+            <img src="" alt="" />
+            <div className="count">{this.state.order}</div>
+          </div>
         </div>
         <div className="card">
           <div className="img-thumb-product">
