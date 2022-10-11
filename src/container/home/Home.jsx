@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Product from '../pages/product/Product'
 import LifecycleComp from '../pages/lifecycleComponent/LifecycleComp'
 import BlogPost from "../pages/blogPost/BlogPost";
-import { BrowserRouter, Route, Link, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom'
 import './Home.css'
 
 class Home extends Component {
@@ -13,7 +13,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
+        <Router>
           <div className="navbar">
             <div className="container">
               <div className="NavbarBrand">
@@ -32,7 +32,7 @@ class Home extends Component {
             <Route path="/product" element={<Product />} />
             <Route path="/lifecycle" element={<LifecycleComp />} />
           </Routes>
-        </BrowserRouter>
+        </Router>
       </div>
     )
   }
