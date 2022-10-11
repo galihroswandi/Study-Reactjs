@@ -7,12 +7,33 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 const globalState = {
-  totalOrder : 123
+  totalOrder : 1
 }
 
 // Reducer
 const rootReducer = (state = globalState, action) => {
-  return state;
+
+  switch( action.type ){
+    case "PLUS_ORDER" :
+      return{
+        ...state,
+        totalOrder : state.totalOrder + 1
+      }
+    case "MINUS_ORDER" : 
+
+      let order = 0;
+      if( state.totalOrder > 0 ){
+        order = state.totalOrder - 1
+      }
+      return{
+        ...state,
+        totalOrder : order,
+      }
+      
+    default : 
+      return state;
+  }
+
 }
 
 // Store

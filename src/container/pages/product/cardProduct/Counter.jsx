@@ -6,34 +6,34 @@ class Counter extends Component {
     //     order: 1,
     // }
 
-    handleCounterChange = (newValue) => {
-        this.props.onCounterChange(newValue);
-    }
+    // handleCounterChange = (newValue) => {
+    //     this.props.onCounterChange(newValue);
+    // }
 
-    handlePlus = () => {
-        this.setState({
-            order: this.state.order + 1
-        }, () => {
-            this.handleCounterChange(this.state.order);
-        })
-    }
+    // handlePlus = () => {
+    //     this.setState({
+    //         order: this.state.order + 1
+    //     }, () => {
+    //         this.handleCounterChange(this.state.order);
+    //     })
+    // }
 
-    handleMinus = () => {
-        if (this.state.order > 0) {
-            this.setState({
-                order: this.state.order - 1
-            }, () => {
-                this.handleCounterChange(this.state.order);
-            })
-        }
-    }
+    // handleMinus = () => {
+    //     if (this.state.order > 0) {
+    //         this.setState({
+    //             order: this.state.order - 1
+    //         }, () => {
+    //             this.handleCounterChange(this.state.order);
+    //         })
+    //     }
+    // }
 
     render() {
         return (
             <div className="counter">
-                <button className="minus" onClick={this.handleMinus}>-</button>
+                <button className="minus" onClick={this.props.handleMinus}>-</button>
                 <input type="text" name="" id="" value={this.props.order} />
-                <button className="plus" onClick={this.handlePlus}>+</button>
+                <button className="plus" onClick={this.props.handlePlus}>+</button>
             </div>
         )
     }
@@ -45,4 +45,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Counter);
+const mapDispatchToProps = dispatch => {
+    return{
+        handlePlus : () => dispatch({type : "PLUS_ORDER"}),
+        handleMinus : () =>  dispatch({type : "MINUS_ORDER"})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);

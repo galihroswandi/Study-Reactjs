@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from "react-redux";
 
 export class LifecycleComp extends Component {
   constructor(props) {
@@ -78,9 +79,17 @@ export class LifecycleComp extends Component {
         >
           Component Button {this.state.count}
         </button>
+        <hr />
+        <h4 style={{marginLeft : "2rem", marginTop : "2rem"}}>Total Order : {this.props.order}</h4>
       </div>
     )
   }
 }
 
-export default LifecycleComp
+const mapStateToProps = state => {
+  return{
+    order : state.totalOrder
+  }
+}
+
+export default connect(mapStateToProps)(LifecycleComp)
