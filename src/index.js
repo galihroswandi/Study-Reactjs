@@ -3,17 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import rootReducer from './redux/reducer/GlobalReducer';
+// import { createStore } from 'redux';
+// import { Provider } from 'react-redux';
+// import rootReducer from './redux/reducer/GlobalReducer';
 
-// Store
-const store = createStore(rootReducer); 
+// // Store
+// const store = createStore(rootReducer); 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+    // <React.StrictMode>
+    //   <Provider store={store}><App /></Provider>
+    // </React.StrictMode>
   <React.StrictMode>
-    <Provider store={store}><App /></Provider>
+    <App />
   </React.StrictMode>
 );
 
