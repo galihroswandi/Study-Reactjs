@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import GlobalActionType from '../../../../redux/reducer/GlobalActionType'
-import { RootContext } from '../../../home/Home'
+import { GlobalConsumer } from '../../../../context/context'
 
 class Counter extends Component {
   // state = {
@@ -32,21 +30,15 @@ class Counter extends Component {
 
   render() {
     return (
-      <RootContext.Consumer>
-        {(value) => {
-          return (
-            <div className="counter">
-              <button className="minus" onClick={() => value.dispatch({type : "MINUS_ORDER"})}>
-                -
-              </button>
-              <input type="text" name="" id="" value={value.state.totalOrder} />
-              <button className="plus" onClick={() => value.dispatch({type : "PLUS_ORDER"})}>
-                +
-              </button>
-            </div>
-          )
-        }}
-      </RootContext.Consumer>
+      <div className="counter">
+        <button className="minus" onClick={() => this.props.dispatch({ type: "MINUS_ORDER" })}>
+          -
+        </button>
+        <input type="text" name="" id="" value={this.props.state.totalOrder} />
+        <button className="plus" onClick={() => this.props.dispatch({ type: "PLUS_ORDER" })}>
+          +
+        </button>
+      </div>
     )
   }
 }
@@ -64,4 +56,4 @@ class Counter extends Component {
 //   }
 // }
 
-export default Counter
+export default GlobalConsumer(Counter)

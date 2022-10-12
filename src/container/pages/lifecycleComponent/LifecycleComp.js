@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { RootContext } from '../../home/Home';
+import { GlobalConsumer } from '../../../context/context';
 
 export class LifecycleComp extends Component {
   constructor(props) {
@@ -61,34 +60,27 @@ export class LifecycleComp extends Component {
 
   render() {
     return (
-      <RootContext.Consumer>
-        {
-          value => {
-            return (<div>
-              <button
-                style={{
-                  paddingTop: '.5rem',
-                  paddingBottom: '.5rem',
-                  paddingInline: '1rem',
-                  border: 'none',
-                  borderRadius: '.3rem',
-                  backgroundColor: 'crimson',
-                  fontSize: '.9em',
-                  color: 'white',
-                  margin: '5rem',
-                  cursor: 'pointer',
-                }}
-                onClick={() => this.changeCount()}
-              >
-                Component Button {this.state.count}
-              </button>
-              <hr />
-              <h4 style={{ marginLeft: "2rem", marginTop: "2rem" }}>Total Order : {value.state.totalOrder}</h4>
-            </div>)
-          }
-        }
-
-      </RootContext.Consumer>
+      <div>
+        <button
+          style={{
+            paddingTop: '.5rem',
+            paddingBottom: '.5rem',
+            paddingInline: '1rem',
+            border: 'none',
+            borderRadius: '.3rem',
+            backgroundColor: 'crimson',
+            fontSize: '.9em',
+            color: 'white',
+            margin: '5rem',
+            cursor: 'pointer',
+          }}
+          onClick={() => this.changeCount()}
+        >
+          Component Button {this.state.count}
+        </button>
+        <hr />
+        <h4 style={{ marginLeft: "2rem", marginTop: "2rem" }}>Total Order : {this.props.state.totalOrder}</h4>
+      </div>
     )
   }
 }
@@ -100,4 +92,4 @@ export class LifecycleComp extends Component {
 // }
 
 // export default connect(mapStateToProps)(LifecycleComp)
-export default LifecycleComp
+export default GlobalConsumer(LifecycleComp)

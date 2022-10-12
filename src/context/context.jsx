@@ -30,7 +30,7 @@ const GlobalProvider = (Children) => {
                         state : this.state,
                         dispatch : this.dispatch
                     }}>
-                        <Children />
+                        <Children {...this.props} />
                     </Provider>
                 )
             }
@@ -40,3 +40,21 @@ const GlobalProvider = (Children) => {
 export default GlobalProvider;
 
 // Consumer
+const Consumer = RootContext.Consumer;
+export const GlobalConsumer = Children => {
+    return(
+        class ParentCompo extends Component{
+            render(){
+                return(
+                    <Consumer>
+                        {
+                            value => {
+                                return <Children {...this.props} {...value} />
+                            }
+                        } 
+                    </Consumer>
+                )
+            }
+        }
+    )
+}
