@@ -36,11 +36,11 @@ class Counter extends Component {
         {(value) => {
           return (
             <div className="counter">
-              <button className="minus" onClick={() => null}>
+              <button className="minus" onClick={() => value.dispatch({type : "MINUS_ORDER"})}>
                 -
               </button>
-              <input type="text" name="" id="" value={value.totalOrder} />
-              <button className="plus" onClick={() => null}>
+              <input type="text" name="" id="" value={value.state.totalOrder} />
+              <button className="plus" onClick={() => value.dispatch({type : "PLUS_ORDER"})}>
                 +
               </button>
             </div>
@@ -51,17 +51,17 @@ class Counter extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    order: state.totalOrder,
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     order: state.totalOrder,
+//   }
+// }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    handlePlus: () => dispatch({ type: GlobalActionType.PLUS_ORDER }),
-    handleMinus: () => dispatch({ type: GlobalActionType.MINUS_ORDER }),
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     handlePlus: () => dispatch({ type: GlobalActionType.PLUS_ORDER }),
+//     handleMinus: () => dispatch({ type: GlobalActionType.MINUS_ORDER }),
+//   }
+// }
 
 export default Counter

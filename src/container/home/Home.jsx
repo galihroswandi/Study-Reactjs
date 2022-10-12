@@ -16,13 +16,29 @@ const Provider = RootContext.Provider;
 
 class Home extends Component {
   state = {
-    totalOrder : 10
+    totalOrder: 10
+  }
+
+  dispatch = (action) => {
+    switch( action.type ){
+      case "PLUS_ORDER":
+        return this.setState({
+          totalOrder : this.state.totalOrder + 1
+        })
+      case "MINUS_ORDER" :
+        return this.setState({
+          totalOrder : this.state.totalOrder - 1
+        })
+    }
   }
 
   render() {
     return (
       <div>
-        <Provider value={this.state}>
+        <Provider value={{
+          state : this.state,
+          dispatch : this.dispatch
+        }}>
           <Router>
             <div className="navbar">
               <div className="container">

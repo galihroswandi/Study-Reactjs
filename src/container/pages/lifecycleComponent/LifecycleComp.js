@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { RootContext } from '../../home/Home';
 
 export class LifecycleComp extends Component {
   constructor(props) {
@@ -59,37 +60,44 @@ export class LifecycleComp extends Component {
   }
 
   render() {
-    console.log('render')
     return (
-      <div>
-        <button
-          style={{
-            paddingTop: '.5rem',
-            paddingBottom: '.5rem',
-            paddingInline: '1rem',
-            border: 'none',
-            borderRadius: '.3rem',
-            backgroundColor: 'crimson',
-            fontSize: '.9em',
-            color: 'white',
-            margin: '5rem',
-            cursor: 'pointer',
-          }}
-          onClick={() => this.changeCount()}
-        >
-          Component Button {this.state.count}
-        </button>
-        <hr />
-        <h4 style={{marginLeft : "2rem", marginTop : "2rem"}}>Total Order : {this.props.order}</h4>
-      </div>
+      <RootContext.Consumer>
+        {
+          value => {
+            return (<div>
+              <button
+                style={{
+                  paddingTop: '.5rem',
+                  paddingBottom: '.5rem',
+                  paddingInline: '1rem',
+                  border: 'none',
+                  borderRadius: '.3rem',
+                  backgroundColor: 'crimson',
+                  fontSize: '.9em',
+                  color: 'white',
+                  margin: '5rem',
+                  cursor: 'pointer',
+                }}
+                onClick={() => this.changeCount()}
+              >
+                Component Button {this.state.count}
+              </button>
+              <hr />
+              <h4 style={{ marginLeft: "2rem", marginTop: "2rem" }}>Total Order : {value.state.totalOrder}</h4>
+            </div>)
+          }
+        }
+
+      </RootContext.Consumer>
     )
   }
 }
 
-const mapStateToProps = state => {
-  return{
-    order : state.totalOrder
-  }
-}
+// const mapStateToProps = state => {
+//   return{
+//     order : state.totalOrder
+//   }
+// }
 
-export default connect(mapStateToProps)(LifecycleComp)
+// export default connect(mapStateToProps)(LifecycleComp)
+export default LifecycleComp
