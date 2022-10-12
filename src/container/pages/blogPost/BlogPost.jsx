@@ -3,6 +3,7 @@ import PostComponent from '../../../components/post/PostComponent'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './BlogPost.css'
+import API from '../../../services'
 
 class BlogPost extends Component {
   state = {
@@ -14,15 +15,28 @@ class BlogPost extends Component {
       body: '',
     },
     isUpdate: false,
+    comments: []
   }
   getDataAPI = () => {
-    axios
-      .get('http://localhost:3004/posts?_sort=id&_order=desc')
-      .then((response) => {
-        this.setState({
-          post: response.data,
-        })
+
+    API.getNewsBlog().then(response => {
+      this.setState({
+        post: response
       })
+    })
+
+    API.getComments().then(response => {
+      this.setState({
+        comments: response
+      })
+    })
+    // axios
+    //   .get('http://localhost:3004/posts?_sort=id&_order=desc')
+    //   .then((response) => {
+    //     this.setState({
+    //       post: response.data,
+    //     })
+    //   })
   }
 
   postDataAPI = () => {
@@ -170,6 +184,19 @@ class BlogPost extends Component {
             alignItems: 'center',
           }}
         >
+
+          <div>
+            <h1>My Comments</h1>
+            {
+              this.state.comments.map(comment => {
+                return (
+                  <p>{comment.name} - {comment.email}</p>
+                )
+              })
+            }
+          </div>
+
+
           {this.state.post.map((post) => {
             return (
               <PostComponent
