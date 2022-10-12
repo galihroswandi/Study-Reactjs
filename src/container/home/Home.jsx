@@ -7,63 +7,39 @@ import Product from '../pages/product/Product'
 import LifecycleComp from '../pages/lifecycleComponent/LifecycleComp'
 import BlogPost from "../pages/blogPost/BlogPost";
 import DetailPost from '../pages/blogPost/detailPost/DetailPost';
+import GlobalProvider from '../../context/context';
 
 // styling
 import './Home.css'
 
-export const RootContext = createContext();
-const Provider = RootContext.Provider;
-
 class Home extends Component {
-  state = {
-    totalOrder: 10
-  }
-
-  dispatch = (action) => {
-    switch( action.type ){
-      case "PLUS_ORDER":
-        return this.setState({
-          totalOrder : this.state.totalOrder + 1
-        })
-      case "MINUS_ORDER" :
-        return this.setState({
-          totalOrder : this.state.totalOrder - 1
-        })
-    }
-  }
-
   render() {
     return (
       <div>
-        <Provider value={{
-          state : this.state,
-          dispatch : this.dispatch
-        }}>
-          <Router>
-            <div className="navbar">
-              <div className="container">
-                <div className="NavbarBrand">
-                  <h1>Firts</h1>
-                  <h1>Last</h1>
-                </div>
-                <ul>
-                  <li><Link to="/" className='navLink'>Home</Link></li>
-                  <li><Link to="/product" className='navLink'>Product</Link></li>
-                  <li><Link to="/lifecycle" className='navLink'>LifeCycle</Link></li>
-                </ul>
+        <Router>
+          <div className="navbar">
+            <div className="container">
+              <div className="NavbarBrand">
+                <h1>Firts</h1>
+                <h1>Last</h1>
               </div>
+              <ul>
+                <li><Link to="/" className='navLink'>Home</Link></li>
+                <li><Link to="/product" className='navLink'>Product</Link></li>
+                <li><Link to="/lifecycle" className='navLink'>LifeCycle</Link></li>
+              </ul>
             </div>
-            <Routes>
-              <Route path="/" element={<BlogPost />} />
-              <Route path="/detail-post/:id" element={<DetailPost />} />
-              <Route path="/product" element={<Product />} />
-              <Route path="/lifecycle" element={<LifecycleComp />} />
-            </Routes>
-          </Router>
-        </Provider>
+          </div>
+          <Routes>
+            <Route path="/" element={<BlogPost />} />
+            <Route path="/detail-post/:id" element={<DetailPost />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/lifecycle" element={<LifecycleComp />} />
+          </Routes>
+        </Router>
       </div>
     )
   }
 }
 
-export default Home
+export default GlobalProvider(Home);
