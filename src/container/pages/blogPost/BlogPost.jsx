@@ -17,6 +17,7 @@ class BlogPost extends Component {
     isUpdate: false,
     comments: [],
   }
+
   getDataAPI = () => {
     API.getNewsBlog().then((response) => {
       this.setState({
@@ -29,13 +30,6 @@ class BlogPost extends Component {
         comments: response,
       })
     })
-    // axios
-    //   .get('http://localhost:3004/posts?_sort=id&_order=desc')
-    //   .then((response) => {
-    //     this.setState({
-    //       post: response.data,
-    //     })
-    //   })
   }
 
   postDataAPI = () => {
@@ -53,36 +47,33 @@ class BlogPost extends Component {
   }
 
   putDataToAPI = () => {
-    axios
-      .put(
-        `http://localhost:3004/posts/${this.state.formBlogPost.id}`,
-        this.state.formBlogPost,
-      )
-      .then((response) => {
-        this.getDataAPI()
-
-        this.setState({
-          formBlogPost: {
-            userId: 1,
-            id: 1,
-            title: '',
-            body: '',
-          },
-          isUpdate: false,
-        })
+    API.updateNewsBlog(
+      this.state.formBlogPost,
+      this.state.formBlogPost.id,
+    ).then((response) => {
+      this.getDataAPI()
+      this.setState({
+        formBlogPost: {
+          userId: 1,
+          id: 1,
+          title: '',
+          body: '',
+        },
+        isUpdate: false,
       })
+    })
+  }
+
+  handleRemove = (id) => {
+    API.deleteNewsBlog(id).then((response) => {
+      this.getDataAPI()
+    })
   }
 
   handleUpdate = (data) => {
     this.setState({
       formBlogPost: data,
       isUpdate: true,
-    })
-  }
-
-  handleRemove = (id) => {
-    axios.delete(`http://localhost:3004/posts/${id}`).then((response) => {
-      this.getDataAPI()
     })
   }
 
