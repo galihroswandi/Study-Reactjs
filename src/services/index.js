@@ -1,28 +1,18 @@
-import axios from "axios";
+import axios from 'axios'
+import Post from './Post'
+import Get from './Get'
 
-const RootPath = 'http://localhost:3004';
-const OnlinePath = 'https://jsonplaceholder.typicode.com';
+// Post
+const postNewsBlog = (data) => Post('posts', false, data)
 
-const Get = (path, root) => {
-    const promise = new Promise((resolve, reject) => {
-        axios
-            .get(`${ root ? OnlinePath : RootPath}/${path}`)
-            .then((response) => {
-                resolve(response.data);
-            }, (err) => {
-                reject(err)
-            })
-    })
-
-    return promise;
-}
-
-const getNewsBlog = () => Get('posts?_sort=id&_order=desc', false);
-const getComments = () => Get('comments', true);
+// Get
+const getNewsBlog = () => Get('posts?_sort=id&_order=desc', false)
+const getComments = () => Get('comments', true)
 
 const API = {
-    getNewsBlog,
-    getComments
+  postNewsBlog,
+  getNewsBlog,
+  getComments,
 }
 
-export default API;
+export default API

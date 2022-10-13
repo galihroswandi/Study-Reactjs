@@ -15,19 +15,18 @@ class BlogPost extends Component {
       body: '',
     },
     isUpdate: false,
-    comments: []
+    comments: [],
   }
   getDataAPI = () => {
-
-    API.getNewsBlog().then(response => {
+    API.getNewsBlog().then((response) => {
       this.setState({
-        post: response
+        post: response,
       })
     })
 
-    API.getComments().then(response => {
+    API.getComments().then((response) => {
       this.setState({
-        comments: response
+        comments: response,
       })
     })
     // axios
@@ -40,23 +39,17 @@ class BlogPost extends Component {
   }
 
   postDataAPI = () => {
-    axios.post('http://localhost:3004/posts', this.state.formBlogPost).then(
-      (respose) => {
-        this.getDataAPI()
-
-        this.setState({
-          formBlogPost: {
-            userId: 1,
-            id: 1,
-            title: '',
-            body: '',
-          },
-        })
-      },
-      (err) => {
-        alert(err)
-      },
-    )
+    API.postNewsBlog(this.state.formBlogPost).then((response) => {
+      this.getDataAPI()
+      this.setState({
+        formBlogPost: {
+          userId: 1,
+          id: 1,
+          title: '',
+          body: '',
+        },
+      })
+    })
   }
 
   putDataToAPI = () => {
@@ -184,18 +177,16 @@ class BlogPost extends Component {
             alignItems: 'center',
           }}
         >
-
-          <div>
+          {/* <div>
             <h1>My Comments</h1>
-            {
-              this.state.comments.map(comment => {
-                return (
-                  <p>{comment.name} - {comment.email}</p>
-                )
-              })
-            }
-          </div>
-
+            {this.state.comments.map((comment) => {
+              return (
+                <p>
+                  {comment.name} - {comment.email}
+                </p>
+              )
+            })}
+          </div> */}
 
           {this.state.post.map((post) => {
             return (
